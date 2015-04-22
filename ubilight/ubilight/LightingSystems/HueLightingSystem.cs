@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
@@ -12,14 +13,21 @@ namespace ubilight.LightingSystems
     public class HueLightingSystem: ILightingSystem
     {
 
-        //TODO hue controller discovery
         private HueClient _client;
 
         public HueLightingSystem(string name)
         {
-            var s = GetBridges().First();
-            Console.WriteLine(s);
-            _client = new HueClient(s);
+            var bridges = GetBridges();
+
+            if (!bridges.Any())
+            {
+                throw new Exception("no bridge found!");
+            }
+            foreach (var bridge in bridges)
+            {
+                Console.WriteLine(bridge);
+            }
+            _client = new HueClient(bridges.First());
             _client.RegisterAsync("ubilight", "ubilightkey");
             _client.Initialize("ubilightkey");
             Name = name;
@@ -31,7 +39,8 @@ namespace ubilight.LightingSystems
 
             //For Windows 8 and .NET45 projects you can use the SSDPBridgeLocator which actually scans your network. 
             //See the included BridgeDiscoveryTests and the specific .NET and .WinRT projects
-            return locator.LocateBridgesAsync(TimeSpan.FromSeconds(5)).Result;
+            return locator.LocateBridgesAsync(TimeSpan.FromSeconds(3)).Result;
+
         }
 
         public string Name { get; set; }

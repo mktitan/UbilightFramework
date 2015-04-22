@@ -21,7 +21,7 @@ namespace Test
             }
 
 
-            ubi.TurnOff("hue2");
+            ubi.Flip("hue1");
 
 
             Console.Read();
