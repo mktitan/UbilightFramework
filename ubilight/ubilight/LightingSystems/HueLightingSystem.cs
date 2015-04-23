@@ -15,19 +15,12 @@ namespace ubilight.LightingSystems
 
         private HueClient _client;
 
-        public HueLightingSystem(string name)
+        public HueLightingSystem(string name, string ip)
         {
-            var bridges = GetBridges();
+            //var bridges = GetBridges();
 
-            if (!bridges.Any())
-            {
-                throw new Exception("no bridge found!");
-            }
-            foreach (var bridge in bridges)
-            {
-                Console.WriteLine(bridge);
-            }
-            _client = new HueClient(bridges.First());
+            
+            _client = new HueClient(ip);
             _client.RegisterAsync("ubilight", "ubilightkey");
             _client.Initialize("ubilightkey");
             Name = name;
