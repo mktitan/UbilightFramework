@@ -68,7 +68,6 @@
     <Compile Include="LightingSystems\HueLightingSystem.cs" />
     <Compile Include="LightingSystems\ILightingSystem.cs" />
     <Compile Include="LightSource.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ubilight.cs" />
   </ItemGroup>

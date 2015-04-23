@@ -13,7 +13,7 @@ namespace Test
         static void Main(string[] args)
         {
 
-            var ubi = new Ubilight(new List<ILightingSystem>(){new HueLightingSystem("hue")});
+            var ubi = new Ubilight(new List<ILightingSystem>(){new HueLightingSystem("hue", "1.1.1.1")});
 
             foreach (var s in ubi.GetLightSourceIDs())
             {
